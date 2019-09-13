@@ -16,8 +16,6 @@ import agile.utilities.DataInputProvider;
 
 import com.aventstack.extentreports.ExtentTest;
 
-
-
 public class AgileProjectmethods extends GenericAppMethods {
 	public ExtentTest testSuite;
 	public String dataSheetName;
@@ -33,7 +31,6 @@ public class AgileProjectmethods extends GenericAppMethods {
 		startTestModule(testCaseName, testDescription);	
 		//startApp();
 	}
-
 	
 	@BeforeMethod
 	public void beforeMethod() throws FileNotFoundException, IOException
@@ -43,19 +40,16 @@ public class AgileProjectmethods extends GenericAppMethods {
 		test.assignAuthor(authors);
 		//startApp();
 	}
-	
-	
+		
 	public ExtentTest startTestCase(String testCaseName, String testDescription) {
 		testSuite = extent.createTest(testCaseName, testDescription);		
 		return testSuite;
 	}
-	
 	public ExtentTest startTestModule(String nodes) {
 		test = testSuite.createNode(nodes);
 		return test;
 	}
-	
-	
+		
 	@AfterMethod
 	public void afterMethod() throws FileNotFoundException, IOException
 	{

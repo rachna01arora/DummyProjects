@@ -14,8 +14,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import agile.utilities.Reporter;
 
@@ -74,6 +78,42 @@ public class GenericAppMethods extends Reporter implements WebDriverEventListene
 	
 	public void closeapp(){
 		driver.close();
+	}
+	
+	public void compareText(String Expected, String Actual){
+		if(Expected.contentEquals(Actual)){
+			reportStep("Expected value is " +Expected +"Actual value is"+ Actual +"are same" , "PASS");
+		}
+		else{
+			reportStep("Expected value is " +Expected +"Actual value is"+ Actual +"are different" , "FAIL");
+		}
+	}
+	
+	public void checkTextDisplay(WebElement ele){
+		explicitWait(ele);
+		Boolean actual=ele.isDisplayed();
+		if (actual){
+			reportStep("text is displaying" , "PASS");
+		}
+		else{
+			reportStep("text is not displaying" , "PASS");
+		}
+	}
+	
+	public void click(WebElement ele){
+		explicitWait(ele);
+		ele.click();
+	}
+	
+	public void actionClick(WebElement ele){
+		explicitWait(ele);
+		Actions action=new Actions(driver);
+		action.moveToElement(ele).click().perform();	
+	}
+	
+	public void explicitWait(WebElement ele){
+		WebDriverWait wait1 = new WebDriverWait(driver, 20);       
+        wait1.until(ExpectedConditions.elementToBeClickable(ele));
 	}
 
 	public void beforeAlertAccept(WebDriver driver) {
